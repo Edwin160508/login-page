@@ -1,12 +1,18 @@
 <main>
-    <section>
+    <section class="form-section">
         <img src="assets/svg/logo.svg"/>
-        <h2></h2>
-        <button>Login</button>
-        <div><span>or</span></div>
-        <button>Register</button>
+        <h2>{{title}}</h2>
+        <div class="btn-wrapper">
+            <button class="btn-primary">{{primaryButtonText}}</button>
+            <div class="divider">
+                <div></div>
+                <span>or</span>
+                <div></div>
+            </div>
+            <button class="btn-secondary">{{secondaryButtonText}}</button>
+        </div>
     </section>
-    <section>
+    <section class="main-section">
         <h1>You Should, MoveIt!</h1>
         <img src="assets/svg/main-illustrator.svg"/>
     </section>
