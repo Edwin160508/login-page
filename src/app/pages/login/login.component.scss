@@ -1,0 +1,16 @@
+@import "../../../styles/variables";
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 24px;
+    margin-bottom: 34px;
+
+    span {
+        font-size: 14px;
+        text-decoration: underline;
+        color: $secondary-color;
+        text-align: end;
+        cursor: pointer;
+    }
+}
