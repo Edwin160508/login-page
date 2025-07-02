@@ -13,8 +13,14 @@
             placeholder="johndoe@gmail.com"
             required >
             <img src="assets/svg/email-icon.svg" alt="Email Icon">
-        </app-primary-input>
-
+        </app-primary-input>        
+        <span class="error-message" *ngIf="loginForm.get('email')?.errors as errors">
+            <ng-container *ngIf="loginForm.get('email')?.dirty || loginForm.get('email')?.touched">
+              <ng-container *ngIf="errors['required']">E-mail é obrigatório.</ng-container> <br />
+              <ng-container *ngIf="errors['email']">Formato de e-mail inválido.</ng-container> <br />
+              <ng-container *ngIf="errors['minlength']">E-mail deve ter pelo menos 5 caracteres.</ng-container>
+            </ng-container>
+        </span>
         <app-primary-input 
             formControlName = "password"
             type="password" 

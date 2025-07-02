@@ -5,11 +5,13 @@ import { PrimaryInputComponent } from '../../components/primary-input/primary-in
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { Toast, ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     DefaultLoginLayoutComponent,
     PrimaryInputComponent
@@ -27,7 +29,7 @@ export class LoginComponent {
     private toastService: ToastrService
   ) {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(5)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
   }
