@@ -37,18 +37,18 @@ export class LoginComponent {
   submit(): void {
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
-      console.log('Form submitted:', formData);
-      this.loginService.login(formData.email, formData.password).subscribe({
+      //console.log('Form submitted:', formData);
+      this.loginFake();// apenas navega para home, sem autenticação real.
+      /*this.loginService.login(formData.email, formData.password).subscribe({
         next: (response) => {
-          console.log('Login successful:', response);
-          this.toastService.success('Login realizado.', 'Success');
-          //this.router.navigate(['home']);
+          console.log('Login successful:', response);                   
+          this.router.navigate(['main']);
         },
         error: (error) => {
           console.error('Login failed:', error);
           this.toastService.error('Login erro inesperado! Tente novamente mais tarde.', 'Error');
         }
-      })
+      })*/
     } else {
       console.log('Form is invalid');
     }
@@ -58,5 +58,8 @@ export class LoginComponent {
     this.router.navigate(['signup']);
   }
 
+  loginFake(): void {
+    this.router.navigate(['main']);
+  }
 
 }
