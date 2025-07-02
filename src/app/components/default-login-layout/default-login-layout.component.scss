@@ -59,6 +59,9 @@ section {
             background: transparent;
             padding: 12px 24px;
             cursor: pointer;
+            &:disabled {
+                opacity: 0.5;
+            }
             &.btn-primary {
                 background-color: $primary-color;
                 color: white;
