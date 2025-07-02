@@ -19,8 +19,9 @@
             formControlName = "password"
             type="password" 
             inputName="password"
-            label="Your Password"             
-            required >
+            label="Your Password"
+            [disabled]="loginForm.get('email')?.invalid ?? false"
+            required>
             <img src="assets/svg/password-icon.svg" alt="Password Icon">
         </app-primary-input>
 

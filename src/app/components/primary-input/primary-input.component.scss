@@ -13,6 +13,12 @@
         width: 100%;
         border-radius: 8px;
         display: flex;
+        input:disabled{             
+            opacity: 0.5;
+            + .icon {
+                opacity: 0.5;
+            }            
+        }
         .icon {
             padding: 12px;
             background-color: $primary-color;
