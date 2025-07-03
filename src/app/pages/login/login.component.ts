@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
 import { Form, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { Toast, ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -20,13 +21,19 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
 
+  private emailValueChangesSubscription?: Subscription;
   ngOnInit(): void {
     this.emailValueChangeListener();    
   }
 
+  ngOnDestroy(): void {        
+    if (this.emailValueChangesSubscription) {
+      this.emailValueChangesSubscription.unsubscribe();
+    }    
+  }
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -69,7 +76,7 @@ export class LoginComponent implements OnInit {
   emailValueChangeListener(): void {
     const emailControl = this.loginForm.get('email');
     if (emailControl) {
-      emailControl.valueChanges.subscribe(() => {
+      this.emailValueChangesSubscription = emailControl.valueChanges.subscribe(() => {
         this.habilitarCampoSenha();
       });
     }
