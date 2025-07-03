@@ -23,7 +23,7 @@ export class PrimaryInputComponent implements ControlValueAccessor {
   @Input() placeholder: string = '';
   @Input() label: string = '';
   @Input() inputName: string = '';
-  @Input() disabled: boolean = false;
+  disabled: boolean = false;
 
   value: string = '';
   onChange: any = () => {};
@@ -44,6 +44,10 @@ export class PrimaryInputComponent implements ControlValueAccessor {
 
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void{    
+    this.disabled = isDisabled;
   }
 
 }

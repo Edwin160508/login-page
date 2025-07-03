@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DefaultLoginLayoutComponent } from '../../components/default-login-layout/default-login-layout.component';
 import { Form, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input.component';
@@ -20,8 +20,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+
+  ngOnInit(): void {
+    this.emailValueChangeListener();    
+  }
 
   constructor(
     private router: Router,
@@ -30,7 +34,7 @@ export class LoginComponent {
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(5)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      password: new FormControl({value: '', disabled: true}, [Validators.required, Validators.minLength(6)])
     });
   }
 
@@ -62,4 +66,20 @@ export class LoginComponent {
     this.router.navigate(['main']);
   }
 
+  emailValueChangeListener(): void {
+    const emailControl = this.loginForm.get('email');
+    if (emailControl) {
+      emailControl.valueChanges.subscribe(() => {
+        this.habilitarCampoSenha();
+      });
+    }
+  }
+  
+  habilitarCampoSenha(): void {
+    if (this.loginForm.get('email')?.valid) {
+      this.loginForm.get('password')?.enable();
+    } else {
+      this.loginForm.get('password')?.disable();
+    }
+  }
 }
