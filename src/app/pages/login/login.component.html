@@ -10,8 +10,7 @@
             type="email" 
             inputName="email"
             label="Email" 
-            placeholder="johndoe@gmail.com"
-            required >
+            placeholder="johndoe@gmail.com">
             <img src="assets/svg/email-icon.svg" alt="Email Icon">
         </app-primary-input>        
         <span class="error-message" *ngIf="loginForm.get('email')?.errors as errors">
@@ -26,8 +25,7 @@
             type="password" 
             inputName="password"
             label="Your Password"
-            [disabled]="loginForm.get('email')?.invalid ?? false"
-            required>
+            [disabled]="loginForm.get('email')?.invalid ?? false">
             <img src="assets/svg/password-icon.svg" alt="Password Icon">
         </app-primary-input>
 
